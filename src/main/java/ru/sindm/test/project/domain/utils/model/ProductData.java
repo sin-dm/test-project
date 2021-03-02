@@ -1,4 +1,4 @@
-package ru.sindm.test.project.domain.utils;
+package ru.sindm.test.project.domain.utils.model;
 
 public class ProductData {
 

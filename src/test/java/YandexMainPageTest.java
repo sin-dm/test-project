@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.sindm.test.project.domain.pages.SearchResultPage;
 import ru.sindm.test.project.domain.pages.YandexMainPage;
-import ru.sindm.test.project.domain.utils.ProductData;
+import ru.sindm.test.project.domain.utils.model.ProductData;
 
 import java.io.File;
 import java.io.IOException;
