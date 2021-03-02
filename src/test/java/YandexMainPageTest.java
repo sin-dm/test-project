@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.sindm.test.project.domain.pages.SearchResultPage;
 import ru.sindm.test.project.domain.pages.YandexMainPage;
-import ru.sindm.test.project.domain.utils.model.ProductData;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +43,6 @@ public class YandexMainPageTest {
     @Test(description = "Тест проверки поиска")
     public void testSearch() {
         YandexMainPage mainPage = new YandexMainPage(driver);
-        SearchResultPage resultPage = new SearchResultPage(driver);
         driver.get(baseUrl);
         mainPage.inputSearchWord("test");
         mainPage.clickSearchButton();
@@ -54,10 +51,8 @@ public class YandexMainPageTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e.getMessage());
         }
-        Assert.assertEquals(resultPage.getSearchResultItemsCount(), 48);
-        WebElement firstProduct = resultPage.getProductWithHighPriority();
-        String firstProductSku = new Gson().fromJson(firstProduct.getAttribute("data-zone-data"), ProductData.class).getSkuId();
-        Assert.assertEquals(firstProductSku, "100660484027");
+        Assert.assertTrue(mainPage.searchField.isDisplayed());
+        Assert.assertTrue(mainPage.searchResultCategories.isDisplayed());
     }
 
     @Test(description = "Тест добавления продукта из блока рекомендаций в корзину")
@@ -85,6 +80,11 @@ public class YandexMainPageTest {
     public void testSelectProductCategory() {
         YandexMainPage mainPage = new YandexMainPage(driver);
         driver.get(baseUrl);
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e.getMessage());
+        }
         mainPage.getProductCategories().get(0).click();
         Assert.assertTrue(mainPage.categoryPage.isDisplayed());
     }

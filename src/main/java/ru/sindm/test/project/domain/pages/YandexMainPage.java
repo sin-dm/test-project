@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 public class YandexMainPage extends PageObject {
 
-    private WebDriver driver;
-
     @FindBy(id = "header-search")
     public WebElement searchField;
 
@@ -27,6 +25,13 @@ public class YandexMainPage extends PageObject {
     @FindBy(xpath = "//*[@data-apiary-widget-name='@MarketNode/CatalogPage']")
     public WebElement categoryPage;
 
+    @FindBy(xpath = "//*[@data-tid='60d9ec65']")
+    public WebElement searchResultBlock;
+
+    @FindBy(xpath = "//*[@data-zone-name='clarify-category']")
+    public WebElement searchResultCategories;
+
+
     public YandexMainPage(WebDriver driver) {
         super(driver);
     }
@@ -37,10 +42,6 @@ public class YandexMainPage extends PageObject {
 
     public void clickSearchButton() {
         searchField.submit();
-    }
-
-    public String getAdviceBlockHeader() {
-        return adviceBlock.findElement(By.tagName("h3")).getText();
     }
 
     public List<WebElement> getAdviceCategories() {
