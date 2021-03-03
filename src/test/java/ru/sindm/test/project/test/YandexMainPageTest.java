@@ -1,3 +1,4 @@
+package ru.sindm.test.project.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
